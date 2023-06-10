@@ -1,17 +1,14 @@
 import Footer from "./Footer";
 import Header from "./Header";
+import { Input } from "./Input";
 import Main from "./Main";
 import { useState } from "react";
 
 function App() {
 
   const title = "To Do List"
-
-  const  [items,setItems]=useState([
-    { id:1,checked:true,item:"To Read"},
-    { id:2,checked:false,item:"To Sleep"},
-    { id:3,checked:true,item:"To Dance"}
-])
+  const localItems = JSON.parse(localStorage.getItem("items"))
+  const  [items,setItems]=useState(localItems!==null ? localItems : [])
 
 function deleteItem(index){
     const newItems = items.filter((item,i)=>{
@@ -20,6 +17,8 @@ function deleteItem(index){
         }
     })
     setItems(newItems)
+    localStorage.setItem("items",JSON.stringify(newItems))
+
 }
 
 function handleCheck(index){
@@ -32,10 +31,31 @@ function handleCheck(index){
         }
     })
     setItems(newItems)
+    localStorage.setItem("items",JSON.stringify(newItems))
+}
+
+const [newItem,setNewItem]= useState('')
+
+function handleSubmit(e){
+    e.preventDefault();
+    const newItemObj = {
+       checked : false,
+       item : newItem
+    }
+
+    setItems([...items,newItemObj])
+    setNewItem('')
+    localStorage.setItem("items",JSON.stringify([...items,newItemObj]))
+    console.log("Submited");
 }
   return (
     <div className='app'>
       <Header title={title}/>
+      <Input 
+          newItem={newItem}
+          setNewItem={setNewItem}
+          handleSubmit={handleSubmit}
+      />
       <Main 
            items={items}
            handleCheck={handleCheck}

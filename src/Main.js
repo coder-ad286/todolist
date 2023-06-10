@@ -6,19 +6,25 @@ const Main = ({items,handleCheck,deleteItem})=>{
     
     return (
         <main>
-            <ul>
-               {
-                    items.map((item,index)=>{
-                        return (
-                            <Lists item={item} 
-                                   index={index}
-                                   handleCheck={handleCheck}
-                                   deleteItem={deleteItem}
-                            />
-                        )
-                    })
-               }
-            </ul>
+            {items.length > 0 ? (
+                <ul>
+                {
+                     items.map((item,index)=>{
+                         return (
+                             <Lists 
+                                    key={index}
+                                    item={item} 
+                                    index={index}
+                                    handleCheck={handleCheck}
+                                    deleteItem={deleteItem}
+                             />
+                         )
+                     })
+                }
+             </ul>
+            ):(
+                <h1>No Items to Display</h1>
+            )}
         
         </main>
     )
