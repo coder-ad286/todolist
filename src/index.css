@@ -1,0 +1,23 @@
+header{
+    background-color: royalblue;
+    height: 60px;
+    width:101vmax;
+    position: relative;
+    bottom: 20px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 8px;
+}
+
+footer{
+    background-color: cornsilk;
+    position: relative;
+    top: 490px;
+    width:101vmax;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
